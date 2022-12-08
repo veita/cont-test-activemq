@@ -4,7 +4,7 @@ set -ex
 
 cd "${0%/*}"
 
-ACTIVEMQ_VERSION="5.17.2"
+ACTIVEMQ_VERSION="5.17.3"
 ARCHIVE="apache-activemq-$ACTIVEMQ_VERSION-bin.tar.gz"
 
 PORT_WEBUI=8161
@@ -26,19 +26,17 @@ cd ..
 
 # TODO verify download
 
-SUITE=${1:-bullseye}
-CONT=$(buildah from debian:${SUITE})
 
-buildah copy $CONT etc/ /etc
+CONT=$(buildah from debian-multiservice-bullseye)
+
 buildah copy $CONT setup/ /setup
 buildah copy $CONT tmp/${ARCHIVE} /opt/archive.tar.gz
+buildah copy $CONT services/ /services
 buildah run $CONT /bin/bash /setup/setup.sh
 buildah run $CONT rm -rf /setup
 
-buildah config --user activemq $CONT
-buildah config --workingdir /opt/activemq $CONT
-buildah config --cmd '["/bin/sh", "-c", "bin/activemq console"]' $CONT
-
+buildah config --workingdir '/' $CONT
+buildah config --cmd '["/services/init.sh"]' $CONT
 
 buildah config --port $PORT_WEBUI/tcp $CONT
 buildah config --port $PORT_AMQP/tcp  $CONT
@@ -51,3 +49,4 @@ buildah config --author "Alexander Veit" $CONT
 buildah config --label commit=$(git describe --always --tags --dirty=-dirty) $CONT
 
 buildah commit --rm $CONT localhost/test-activemq:latest
+buildah tag localhost/test-activemq:latest localhost/test-activemq:${ACTIVEMQ_VERSION}
