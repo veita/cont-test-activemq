@@ -1,4 +1,4 @@
-# ActiveMQ container with pre-defined topics
+# ActiveMQ container with predefined topics
 
 ## Topics
 * `timer.daily` - one event per day
