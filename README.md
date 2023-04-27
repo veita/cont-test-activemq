@@ -36,6 +36,6 @@ cd test-activemq
 Run the container, e.g. with
 
 ```bash
-podman run --name amq --hostname amq --detach --rm --memory 128M -p 8161:8161 -p 1883:1883 -p 61616:61616 localhost/test-activemq:latest
+podman run --name amq --hostname amq --detach --rm -p 8161:8161 -p 1883:1883 -p 61616:61616 localhost/test-activemq:latest
 ```
 
