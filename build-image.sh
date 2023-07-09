@@ -27,7 +27,7 @@ cd ..
 # TODO verify download
 
 
-CONT=$(buildah from debian-multiservice-bullseye)
+CONT=$(buildah from debian-multiservice:bookworm)
 
 buildah copy $CONT setup/ /setup
 buildah copy $CONT tmp/${ARCHIVE} /opt/archive.tar.gz
