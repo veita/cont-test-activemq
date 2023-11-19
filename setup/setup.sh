@@ -20,7 +20,7 @@ shopt -s dotglob
 cp /etc/skel/* /opt/activemq
 chown -R activemq:activemq /opt/activemq
 
-sed -i 's|ACTIVEMQ_USER=""|ACTIVEMQ_USER="activemq"|g' /opt/activemq/bin/env
+sed -i 's|ACTIVEMQ_USER=""|ACTIVEMQ_USER="activemq"|g' /opt/activemq/bin/setenv
 sed -i 's|<property name="host" value="127.0.0.1"/>|<property name="host" value="0.0.0.0"/>|g' /opt/activemq/conf/jetty.xml
 
 # build https://github.com/veita/mqtt-timer.git
@@ -38,4 +38,3 @@ apt-get install -qy default-jre-headless
 
 # cleanup
 source /setup/cleanup-image.sh
-
