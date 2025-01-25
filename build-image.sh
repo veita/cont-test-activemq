@@ -4,7 +4,7 @@ set -ex
 
 cd "${0%/*}"
 
-ACTIVEMQ_VERSION="6.1.3"
+ACTIVEMQ_VERSION="6.1.4"
 ARCHIVE="apache-activemq-$ACTIVEMQ_VERSION-bin.tar.gz"
 
 PORT_WEBUI=8161
