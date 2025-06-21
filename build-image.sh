@@ -4,7 +4,7 @@ set -ex
 
 cd "${0%/*}"
 
-ACTIVEMQ_VERSION="6.1.5"
+ACTIVEMQ_VERSION="6.1.6"
 ARCHIVE="apache-activemq-$ACTIVEMQ_VERSION-bin.tar.gz"
 
 PORT_WEBUI=8161
@@ -21,7 +21,7 @@ URL="https://dlcdn.apache.org/activemq/${ACTIVEMQ_VERSION}/${ARCHIVE}"
 #URL="https://archive.apache.org/dist/activemq/${ACTIVEMQ_VERSION}/${ARCHIVE}"
 
 cd tmp
-[ -e ${ARCHIVE} ] || curl $URL -o ${ARCHIVE} || exit 1
+[ -e ${ARCHIVE} ] || curl --fail $URL -o ${ARCHIVE} || exit 1
 cd ..
 
 # TODO verify download
