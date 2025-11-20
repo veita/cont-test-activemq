@@ -1,10 +1,10 @@
 #!/bin/bash
 
-set -ex
+set -exuo pipefail
 
 cd "${0%/*}"
 
-ACTIVEMQ_VERSION="6.1.7"
+ACTIVEMQ_VERSION="6.1.8"
 ARCHIVE="apache-activemq-$ACTIVEMQ_VERSION-bin.tar.gz"
 
 PORT_WEBUI=8161
@@ -27,7 +27,7 @@ cd ..
 # TODO verify download
 
 
-CONT=$(buildah from veita/debian-multiservice:bookworm)
+CONT=$(buildah from veita/debian-multiservice:trixie)
 
 buildah copy $CONT setup/ /setup
 buildah copy $CONT tmp/${ARCHIVE} /opt/archive.tar.gz

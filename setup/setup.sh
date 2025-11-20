@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -exuo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 
